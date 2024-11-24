@@ -132,6 +132,24 @@ You can use feature flags in your views:
 - Provides atomic operations
 - Requires Redis server
 
+## Testing
+
+This gem supports multiple Rails versions (6.x, 7.x, and 8.x). We use Appraisal to test against different Rails versions.
+
+To run the tests for all supported Rails versions:
+
+```bash
+bundle exec appraisal rspec
+```
+
+To run tests for a specific Rails version:
+
+```bash
+bundle exec appraisal rails-6 rspec  # For Rails 6
+bundle exec appraisal rails-7 rspec  # For Rails 7
+bundle exec appraisal rails-8 rspec  # For Rails 8
+```
+
 ## Contributing
 
 1. Fork it

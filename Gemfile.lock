@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_flags (0.1.0)
-      rails (>= 8.0.0)
+      rails (>= 6.0, < 8.1)
       redis (~> 5.0)
 
 GEM
@@ -79,6 +79,10 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    appraisal (2.5.0)
+      bundler
+      rake
+      thor (>= 0.14.0)
     ast (2.4.2)
     base64 (0.2.0)
     benchmark (0.4.0)
@@ -238,6 +242,13 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.3.2)
+    sprockets (4.2.1)
+      concurrent-ruby (~> 1.0)
+      rack (>= 2.2.4, < 4)
+    sprockets-rails (3.5.2)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      sprockets (>= 3.0.0)
     sqlite3 (2.3.0-arm64-darwin)
     sqlite3 (2.3.0-x86_64-linux-gnu)
     stringio (3.1.2)
@@ -258,12 +269,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  appraisal
   debug (>= 1.0.0)
   propshaft
   puma
   rails_flags!
   rspec-rails
   rubocop-rails-omakase
+  sprockets-rails
   sqlite3
 
 BUNDLED WITH
