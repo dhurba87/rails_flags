@@ -19,6 +19,10 @@ module RailsFlags
       configuration.register(flag_name, **options)
     end
 
+    def delete(flag_name)
+      configuration.delete(flag_name)
+    end
+
     def enabled?(flag)
       configuration.enabled?(flag)
     rescue KeyError => e

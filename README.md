@@ -9,6 +9,7 @@ A simple and powerful feature flagging system for Ruby on Rails applications. Ra
 - Thread-safe operations
 - Configurable default states
 - Support for flag metadata (descriptions, creation timestamps)
+- Built-in admin interface for managing feature flags
 
 ## Installation
 
@@ -46,7 +47,26 @@ RailsFlags.configure do |config|
 end
 ```
 
-### Registering Flags
+## Usage
+
+### Mounting the Engine
+Add this to your `config/routes.rb`:
+```ruby
+Rails.application.routes.draw do
+  mount RailsFlags::Engine => "/rails_flags"
+end
+```
+
+### Admin Interface
+Access the admin interface at `/rails_flags/admin` to:
+- View all feature flags
+- Create new feature flags
+- Enable/disable flags
+- Delete feature flags
+
+### Programmatic Usage
+
+#### Registering Flags
 ```ruby
 # Register a new feature flag (disabled by default)
 RailsFlags.register(
@@ -63,7 +83,7 @@ RailsFlags.register(
 )
 ```
 
-### Checking Flags
+#### Checking Flags
 ```ruby
 # Check if a flag is enabled
 if RailsFlags.enabled?(:new_feature)
@@ -74,7 +94,7 @@ end
 RailsFlags.registered?(:new_feature)
 ```
 
-### Managing Flags
+#### Managing Flags
 ```ruby
 # Enable a flag
 RailsFlags.enable(:new_feature)
@@ -82,8 +102,19 @@ RailsFlags.enable(:new_feature)
 # Disable a flag
 RailsFlags.disable(:new_feature)
 
+# Delete a flag
+RailsFlags.delete(:new_feature)
+
 # Get all flags
 all_flags = RailsFlags.all_flags
+```
+
+### In Views
+You can use feature flags in your views:
+```erb
+<% if RailsFlags.enabled?(:new_feature) %>
+  <!-- New feature content -->
+<% end %>
 ```
 
 ## Storage Adapters
@@ -98,7 +129,6 @@ all_flags = RailsFlags.all_flags
 - Suitable for production use
 - Provides atomic operations
 - Requires Redis server
-
 
 ## Contributing
 

@@ -42,6 +42,11 @@ module RailsFlags
       @adapter.write(flag.to_sym, data)
     end
 
+    def delete(flag)
+      validate_flag_exists!(flag)
+      @adapter.delete(flag.to_sym)
+    end
+
     def registered?(flag)
       @adapter.read(flag.to_sym) ? true : false
     end
@@ -53,7 +58,8 @@ module RailsFlags
     private
 
     def validate_flag_name!(name)
-      raise ArgumentError, "Flag name must be a String or Symbol" unless name.is_a?(String) || name.is_a?(Symbol)
+      raise ArgumentError, "Flag name cannot be nil" if name.nil?
+      raise ArgumentError, "Flag name must be a string or symbol" unless name.is_a?(String) || name.is_a?(Symbol)
       raise ArgumentError, "Flag name cannot be empty" if name.to_s.strip.empty?
     end
 
