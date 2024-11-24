@@ -2,9 +2,6 @@
 
 A simple and powerful feature flagging system for Ruby on Rails applications. RailsFlags provides an easy way to manage feature flags with support for multiple storage backends.
 
-![RailsFlags](docs/images/dashboard.png)
-
-
 ## Features
 
 - Multiple storage adapters (Redis, Memory)
@@ -66,6 +63,8 @@ Access the admin interface at `/rails_flags/admin` to:
 - Create new feature flags
 - Enable/disable flags
 - Delete feature flags
+
+![RailsFlags](docs/images/dashboard.png)
 
 ### Programmatic Usage
 
