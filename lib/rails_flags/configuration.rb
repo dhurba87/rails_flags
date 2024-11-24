@@ -1,10 +1,10 @@
-require_relative 'adapters/base'
-require_relative 'adapters/redis_adapter'
-require_relative 'adapters/memory_adapter'
+require_relative "adapters/base"
+require_relative "adapters/redis_adapter"
+require_relative "adapters/memory_adapter"
 
 module RailsFlags
   class Configuration
-    attr_reader :adapter
+    attr_accessor :adapter
 
     def initialize(adapter: nil)
       @adapter = adapter || Adapters::MemoryAdapter.new

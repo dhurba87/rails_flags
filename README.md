@@ -1,10 +1,17 @@
 # RailsFlags
-Short description and motivation.
 
-## Usage
-How to use my plugin.
+A simple and powerful feature flagging system for Ruby on Rails applications. RailsFlags provides an easy way to manage feature flags with support for multiple storage backends.
+
+## Features
+
+- Multiple storage adapters (Redis, Memory)
+- Simple and intuitive API
+- Thread-safe operations
+- Configurable default states
+- Support for flag metadata (descriptions, creation timestamps)
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -13,16 +20,94 @@ gem "rails_flags"
 
 And then execute:
 ```bash
-$ bundle
+bundle install
 ```
 
-Or install it yourself as:
-```bash
-$ gem install rails_flags
+## Configuration
+
+RailsFlags can be configured with different adapters based on your needs:
+
+### Memory Adapter (Default)
+```ruby
+# config/initializers/rails_flags.rb
+RailsFlags.configure do |config|
+    config.adapter = RailsFlags::Adapters::MemoryAdapter.new
+end
 ```
+
+### Redis Adapter
+```ruby
+# config/initializers/rails_flags.rb
+RailsFlags.configure do |config|
+    config.adapter = RailsFlags::Adapters::RedisAdapter.new(
+        host: "localhost",
+        port: 6379
+    )
+end
+```
+
+### Registering Flags
+```ruby
+# Register a new feature flag (disabled by default)
+RailsFlags.register(
+  :new_feature,
+  enabled: false,
+  description: "Awesome new feature"
+)
+
+# Register an enabled feature flag
+RailsFlags.register(
+  :another_feature,
+  enabled: true,
+  description: "Another awesome feature"
+)
+```
+
+### Checking Flags
+```ruby
+# Check if a flag is enabled
+if RailsFlags.enabled?(:new_feature)
+  # Feature code here
+end
+
+# Check if a flag is registered
+RailsFlags.registered?(:new_feature)
+```
+
+### Managing Flags
+```ruby
+# Enable a flag
+RailsFlags.enable(:new_feature)
+
+# Disable a flag
+RailsFlags.disable(:new_feature)
+
+# Get all flags
+all_flags = RailsFlags.all_flags
+```
+
+## Storage Adapters
+
+### Memory Adapter
+- Simple in-memory storage
+- Suitable for development and testing
+- Data is lost when the application restarts
+
+### Redis Adapter
+- Persistent storage using Redis
+- Suitable for production use
+- Provides atomic operations
+- Requires Redis server
+
 
 ## Contributing
-Contribution directions go here.
+
+1. Fork it
+2. Create your feature branch (`git checkout -b feature/my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin feature/my-new-feature`)
+5. Create new Pull Request
 
 ## License
+
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
