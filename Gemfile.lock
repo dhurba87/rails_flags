@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_flags (0.1.0)
+    rails_flags (0.1.1)
       rails (>= 6.0, < 8.1)
       redis (~> 5.0)
 
@@ -138,11 +138,6 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
-    propshaft (1.1.0)
-      actionpack (>= 7.0.0)
-      activesupport (>= 7.0.0)
-      rack
-      railties (>= 7.0.0)
     psych (5.2.0)
       stringio
     puma (6.4.3)
@@ -271,7 +266,6 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   debug (>= 1.0.0)
-  propshaft
   puma
   rails_flags!
   rspec-rails

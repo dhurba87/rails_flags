@@ -7,8 +7,6 @@ gem "puma"
 
 gem "sqlite3"
 
-gem "propshaft"
-
 gem "sprockets-rails"
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
