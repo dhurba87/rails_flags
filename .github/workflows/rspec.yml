@@ -1,0 +1,39 @@
+name: RSpec Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.3', '3.2']
+        rails-version: ['rails-6', 'rails-7', 'rails-8']
+
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
+      BUNDLE_PATH: vendor/bundle
+      BUNDLE_FROZEN: false
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Install base dependencies
+      run: |
+        gem install bundler
+        bundle config set --local frozen false
+        bundle install
+        bundle exec appraisal install
+
+    - name: Run RSpec tests with ${{ matrix.rails-version }}
+      run: bundle exec appraisal ${{ matrix.rails-version }} rspec
